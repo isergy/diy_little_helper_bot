@@ -19,7 +19,7 @@ bot = AsyncTeleBot(bot_secrets.LHSECRET) # get token from @BotFather
 #    """
 #    print(message.chat.id)
 # =========================================================================
-@bot.message_handler(content_types=["new_chat_members", "left_chat_member"])
+@bot.message_handler(content_types=["new_chat_members", "left_chat_member"],commands = [""])
 async def handle_new_chat_member_message(message: telebot.types.Message) -> None:
     """
     Обработка (удаление + лог) дурацких сообщений о добавленных пользователях
