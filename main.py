@@ -54,6 +54,7 @@ async def handle_command_message(message: telebot.types.Message) -> None:
                     f"command message from username {message.from_user.username} " 
                     f"(id={message.from_user.id}, name={message.from_user.first_name}) "
                     f"deleted in {message.chat.title} with {status=}"
+                    f"text was '{message.text}'"
                     )
 # =========================================================================
 async def main():
