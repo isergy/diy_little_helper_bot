@@ -26,12 +26,18 @@ async def handle_new_chat_member_message(message: telebot.types.Message) -> None
     """
     if (message.chat.type in ("group", "supergroup")): # обслуживаем только группы
         status = await bot.delete_message(message.chat.id, message.id) #удаляем сообщение
+        markup = telebot.types.InlineKeyboardMarkup()
+        link = f"tg://user?id={message.from_user.id}"
+        button1 = telebot.types.InlineKeyboardButton("user profile", url=link)
+        markup.add(button1)
         for address in bot_secrets.GENERALINFOADDRESSEE: # пишем о событии всем желающим
             await bot.send_message(address, 
-                f"status message from username {message.from_user.username} " 
-                f"(id={message.from_user.id}, name={message.from_user.first_name}) "
-                f"deleted in {message.chat.title} with {status=}"
-                f" message type is '{message.content_type}'"
+                f"type:'{message.content_type}'\n"
+                f"username: <code>{message.from_user.username}</code>\n"
+                f"id: <code>{message.from_user.id}</code>\n" 
+#                f" name: {message.from_user.first_name}) "
+                f"cleaned in {message.chat.title}, {status=}",
+                reply_markup=markup, parse_mode="HTML"
                 )
 # =========================================================================
 # =========================================================================
